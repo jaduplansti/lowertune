@@ -153,7 +153,7 @@ class Player(ft.View):
     def pause(self):
         self.page.android_player.pause()
 
-    def trackProgress(self): 
+    def trackProgress(self): # TODO: FIX THIS
         while self.page.android_player:
             
             duration = self.page.android_player.getDuration()

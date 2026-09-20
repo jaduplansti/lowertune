@@ -38,11 +38,13 @@ async def main(page : ft.Page):
             page.views.append(dashboard)
         elif page.route == "/player":
             page.views.append(player)
+            page.update()
+            if progress_tracked is False:
+                startProgressTracker(page, player)
+                progress_tracked = True
         page.update()
 
-        if progress_tracked is False:
-            startProgressTracker(page, player)
-            progress_tracked = True
+        
 
     async def navigation_changed():
         if navbar.selected_index == 0:
