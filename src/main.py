@@ -23,8 +23,8 @@ def loadAndroidPlayer(page):
         page.android_player = None
 
 def startProgressTracker(page, player):
-    #if page.android_player:
-    page.run_thread(player.trackProgress)
+    if page.android_player:
+        page.run_thread(player.trackProgress)
 
 async def main(page : ft.Page):
     user = User() 
