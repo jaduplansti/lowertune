@@ -23,8 +23,8 @@ def loadAndroidPlayer(page):
         page.android_player = None
 
 def startProgressTracker(page, player):
-    if page.android_player:
-        page.run_thread(player.trackProgress)
+    #if page.android_player:
+    page.run_thread(player.trackProgress)
 
 async def main(page : ft.Page):
     user = User() 
@@ -64,8 +64,6 @@ async def main(page : ft.Page):
     navbar = createNavigationBar(navigation_changed)
     dashboard = Dashboard(user, navigation_bar = navbar)
     player = Player(user, navigation_bar = navbar)
-
-    startProgressTracker(page, player)
 
     page.on_route_change = route_changed
     await page.push_route("/")

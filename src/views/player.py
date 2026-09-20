@@ -1,5 +1,6 @@
 import flet as ft
 import asyncio
+import time
 from youtube import Youtube
 
 @ft.control
@@ -155,9 +156,9 @@ class Player(ft.View):
 
     def trackProgress(self): # TODO: FIX THIS
         while self.page.android_player:
-            
-            duration = self.page.android_player.getDuration()
-            position = self.page.android_player.getPosition()
+            duration = int(self.page.android_player.getDuration())
+            position = int(self.page.android_player.getPosition())
+
 
             if duration > 0:
                 progress = position / duration
