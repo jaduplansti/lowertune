@@ -9,7 +9,8 @@ authors = [
 ]
 dependencies = [
     "flet>=0.86.5",
-    "flet-audio"
+    "pyjnius",
+    "yt-dlp"
 ]
 
 [dependency-groups]
@@ -21,6 +22,10 @@ dev = [
     # pytest, pytest-asyncio and the screenshot-comparison dependencies.
     "flet[test]>=0.86.5",
 ]
+
+
+[tool.flet.android.manifest_application]
+usesCleartextTraffic = "true"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

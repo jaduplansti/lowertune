@@ -1,5 +1,4 @@
 import flet as ft
-import flet_audio as fta 
 import asyncio
 from youtube import Youtube
 
@@ -67,7 +66,7 @@ class Player(ft.View):
             alignment = ft.CrossAxisAlignment.CENTER,
             controls = [
                 ft.IconButton(icon = ft.Icons.FAST_REWIND, icon_size = 48),
-                ft.IconButton(icon = ft.Icons.PLAY_CIRCLE_FILL, icon_size = 60, on_click = self.play),
+                ft.IconButton(icon = ft.Icons.PLAY_CIRCLE_FILL, icon_size = 60, on_click = self.mainButtonClicked),
                 ft.IconButton(icon = ft.Icons.FAST_FORWARD, icon_size = 48)
             ]
         )
@@ -97,12 +96,25 @@ class Player(ft.View):
         self.music_name_ref.current.value = info["title"]
         self.artist_name_ref.current.value = info["artist"]
         self.duration_ref.current.value = info["duration"]
-        self.page.audio.src = info["url"]
+
         self.page.update()
 
-        await self.page.audio.play()
-        
+        self.page.android_player.play(info["url"])
 
-    async def play(self):
-        pass
-        #await self.page.audio_handler.play()
+    def mainButtonClicked(self, e):
+        button : ft.IconButton = e.control 
+        state = self.page.android_player.getState()
+
+        if state == "playing":
+            button.icon = ft.Icons.PLAY_CIRCLE
+            self.pause()
+        elif state == "paused":
+            button.icon = ft.Icons.PAUSE_CIRCLE
+            self.play()
+        self.page.update() 
+
+    def play(self):
+        self.page.android_player.resume()
+
+    def pause(self):
+        self.page.android_player.pause()

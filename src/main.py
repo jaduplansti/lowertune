@@ -1,6 +1,6 @@
 import flet as ft 
 import asyncio
-import flet_audio as fta 
+from android_player import AndroidPlayer
 
 from views.dashboard import Dashboard 
 from views.player import Player
@@ -41,11 +41,7 @@ async def main(page : ft.Page):
         await page.push_route("/player")
         await player.start()
 
-    page.audio = fta.Audio()
-
-    page.services.append(
-        page.audio
-    )
+    page.android_player = AndroidPlayer()
 
     page.player_launch = player_launch
     navbar = createNavigationBar(navigation_changed)
