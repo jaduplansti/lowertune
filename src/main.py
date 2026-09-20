@@ -28,9 +28,11 @@ def startProgressTracker(page, player):
 
 async def main(page : ft.Page):
     user = User() 
+    progress_tracked = False 
 
     def route_changed():
         page.views.clear()
+        nonlocal progress_tracked 
 
         if page.route == "/":
             page.views.append(dashboard)
@@ -38,7 +40,10 @@ async def main(page : ft.Page):
             page.views.append(player)
         page.update()
 
-    
+        if progress_tracked is False:
+            startProgressTracker(page, player)
+            progress_tracked = True
+
     async def navigation_changed():
         if navbar.selected_index == 0:
             await page.push_route("/")

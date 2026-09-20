@@ -35,7 +35,7 @@ class Player(ft.View):
                 src = "icon.png",
                 width = 330,
                 height = 330,
-                fit = ft.BoxFit.COVER
+                fit = ft.BoxFit.CONTAIN
             )
         )
 
@@ -153,8 +153,9 @@ class Player(ft.View):
     def pause(self):
         self.page.android_player.pause()
 
-    def trackProgress(self):
+    def trackProgress(self): 
         while self.page.android_player:
+            
             duration = self.page.android_player.getDuration()
             position = self.page.android_player.getPosition()
 
