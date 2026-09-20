@@ -16,6 +16,16 @@ def createNavigationBar(change_fn):
         on_change = change_fn
     )
 
+def loadAndroidPlayer(page):
+    try:
+        page.android_player = AndroidPlayer()
+    except:
+        page.android_player = None
+
+def startProgressTracker(page, player):
+    if page.android_player:
+        page.run_thread(player.trackProgress)
+
 async def main(page : ft.Page):
     user = User() 
 
@@ -41,20 +51,19 @@ async def main(page : ft.Page):
         await page.push_route("/player")
         await player.start()
 
-    page.android_player = AndroidPlayer()
+    loadAndroidPlayer(page)
 
     page.player_launch = player_launch
     navbar = createNavigationBar(navigation_changed)
     dashboard = Dashboard(user, navigation_bar = navbar)
     player = Player(user, navigation_bar = navbar)
 
-  
+    startProgressTracker(page, player)
+
     page.on_route_change = route_changed
     await page.push_route("/")
     route_changed()
 
-
-    
 
 if __name__ == "__main__":
     ft.run(main)

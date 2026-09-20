@@ -82,10 +82,9 @@ class AndroidPlayer:
 
             if duration > 0 and position >= duration:
                 return "completed"
-
+                
             if position > 0:
                 return "paused"
-
             return "idle"
 
         except Exception:

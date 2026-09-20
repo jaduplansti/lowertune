@@ -2,7 +2,7 @@ import yt_dlp
 
 class Youtube:
     @staticmethod
-    def search(name, n = 1):
+    def search(name, n = 5):
         ydl_opts = {
             'quiet': True,         
             'skip_download': True,  
