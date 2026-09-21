@@ -22,10 +22,6 @@ def loadAndroidPlayer(page):
     except:
         page.android_player = None
 
-def startProgressTracker(page, player):
-    if page.android_player:
-        page.run_thread(player.trackProgress)
-
 async def main(page : ft.Page):
     user = User() 
     progress_tracked = False 
@@ -38,13 +34,7 @@ async def main(page : ft.Page):
             page.views.append(dashboard)
         elif page.route == "/player":
             page.views.append(player)
-            #page.update()
-            #if progress_tracked is False:
-             #   startProgressTracker(page, player)
-              #  progress_tracked = True
         page.update()
-
-        
 
     async def navigation_changed():
         if navbar.selected_index == 0:

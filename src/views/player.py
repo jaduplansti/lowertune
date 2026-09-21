@@ -154,21 +154,3 @@ class Player(ft.View):
     def pause(self):
         self.page.android_player.pause()
 
-    def trackProgress(self): # TODO: FIX THIS
-        while self.page.android_player and self.page.android_player.isPlaying():
-            duration = int(self.page.android_player.getDuration())
-            position = int(self.page.android_player.getPosition())
-
-
-            if duration > 0:
-                progress = position / duration
-                self.progress_bar_ref.current.value = progress
-            
-            if self.page.android_player.isFinished():
-                self.pause()
-                self.play_button_ref.current.icon = ft.Icons.PLAY_CIRCLE
-
-            self.page.update()
-
-            time.sleep(0.5)
-    

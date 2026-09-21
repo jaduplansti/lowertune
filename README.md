@@ -1,69 +1,38 @@
-# Lowertune app
+# Lowertune
+**A YT Music Streaming App**
 
-## Run the app
+> **Warning:** This app is purely experimental and may break, use at your own risk.
 
-### uv
+# Features
+- [x] Youtube Streaming
+- [x] Basic Player
+- [x] Music Searching 
+- [ ] Full Playback Controls 
+- [ ] History Management
 
-Run as a desktop app:
+# Building APK
 
-```bash
-uv run flet run
+``` 
+git clone https://github.com/jaduplansti/lowertune 
+pip install -r requirements.txt
+flet build apk
+``` 
+
+>[!NOTE]
+> Install all project requirements by pip install -r requirements.txt
+
+# Android Player
+
+This project does not use flet-audio as the package is currently facing issues, instead it uses pyjnius to interace with the android java sdk (**MediaPlayer**). You may encounter issues in building.
 ```
+class AndroidPlayer:
+    def __init__(self):
+        self.__media_player_class = autoclass("android.media.MediaPlayer")
+        self.__media_player = self.__media_player_class()
 
-Run as a web app:
-
-```bash
-uv run flet run --web
+    def play(self, url):
+        self.__media_player.reset()
+        self.__media_player.setDataSource(url)
+        self.__media_player.prepare()
+        self.__media_player.start()
 ```
-
-For more details on running the app, refer to the [Getting Started Guide](https://flet.dev/docs/).
-
-## Build the app
-
-### Android
-
-```bash
-flet build apk -v
-```
-
-For more details on building and signing `.apk` or `.aab`, refer to the [Android Packaging Guide](https://flet.dev/docs/publish/android/).
-
-### iOS
-
-```bash
-flet build ipa -v
-```
-
-For more details on building and signing `.ipa`, refer to the [iOS Packaging Guide](https://flet.dev/docs/publish/ios/).
-
-### macOS
-
-```bash
-flet build macos -v
-```
-
-For more details on building macOS package, refer to the [macOS Packaging Guide](https://flet.dev/docs/publish/macos/).
-
-### Linux
-
-```bash
-flet build linux -v
-```
-
-For more details on building Linux package, refer to the [Linux Packaging Guide](https://flet.dev/docs/publish/linux/).
-
-### Windows
-
-```bash
-flet build windows -v
-```
-
-For more details on building Windows package, refer to the [Windows Packaging Guide](https://flet.dev/docs/publish/windows/).
-
-### Web
-
-```bash
-flet build web -v
-```
-
-For more details on building Web app, refer to the [Web Packaging Guide](https://flet.dev/docs/publish/web/).

@@ -1,7 +1,5 @@
 from jnius import autoclass
-
 import flet as ft
-
 
 class AndroidPlayer:
     def __init__(self):

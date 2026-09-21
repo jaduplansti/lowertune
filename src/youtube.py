@@ -37,10 +37,7 @@ class Youtube:
             duration = info.get("duration_string")
             thumbnail = info.get("thumbnail")
             audio_url = info.get("url")
-            
-            print(f"Title: {title}")
-            print(f"Audio Stream URL: {audio_url}")
-            
+    
             return {
                 "title": title,
                 "artist": artist,
